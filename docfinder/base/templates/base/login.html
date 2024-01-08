@@ -1,0 +1,28 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block heading %}
+Login
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <form action="{% url 'login' %}" method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="un_input" class="form-label">Username</label>
+        <input type="text" class="form-control" id="un_input" name="un_input" autocomplete="off" required>
+      </div>
+      <div class="mb-3">
+        <label for="pw_input" class="form-label">Password</label>
+        <input type="password" class="form-control" id="pw_input" name="pw_input" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

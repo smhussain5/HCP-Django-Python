@@ -1,0 +1,45 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+{{specialty.name}}
+{% endblock %}
+
+{% block heading %}
+{{specialty.name}}
+{% endblock %}
+
+{% block content %}
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
+  {% for el in physicians %}
+    <div class="col">
+      <div class="card p-2">
+        <div class="card-body">
+          <div class="d-flex flex-rows justify-content-between">
+            <p class="card-title">
+              {{el.first_name}} {{el.last_name}}, {{el.degree_type}}
+            </p>
+            <a href="{% url 'physician' el.id%}" class="link-underline-opacity-0 link-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+                  <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1"/>
+              </svg>
+            </a>
+          </div>
+          <p class="card-subtitle mb-2 text-body-secondary">
+              {{el.us_city}}, {{el.us_state}}
+          </p>
+          {% if el.taking_new_pts %}
+            <span class="badge bg-primary-subtle border border-primary-subtle text-primary-emphasis rounded-pill">Taking new patients</span>
+          {% else %}
+            <span class="badge bg-danger-subtle border border-danger-subtle text-danger-emphasis rounded-pill">Not taking new patients</span>
+          {% endif %}
+          {% if el.accepts_medicaid_medicare %}
+            <span class="badge bg-primary-subtle border border-primary-subtle text-primary-emphasis rounded-pill">Medicare/Medicaid</span>
+          {% else %}
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">Private Insurance</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

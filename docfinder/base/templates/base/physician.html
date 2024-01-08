@@ -1,0 +1,36 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+{{physician.first_name}} {{physician.last_name}}, {{physician.degree_type}}
+{% endblock %}
+
+{% block heading %}
+{{physician.first_name}} {{physician.last_name}}, {{physician.degree_type}}
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><strong>Specialty:&nbsp;</strong>{{physician.specialty}}</li>
+    <li class="list-group-item"><strong>About Me:&nbsp;</strong>{{physician.about_me}}</li>
+    <li class="list-group-item"><strong>Phone Number:&nbsp;</strong>{{physician.phone_number}}</li>
+    <li class="list-group-item"><strong>Address:&nbsp;</strong>{{physician.address}}</li>
+    <li class="list-group-item"><strong>City:&nbsp;</strong>{{physician.us_city}}</li>
+    <li class="list-group-item"><strong>State:&nbsp;</strong>{{physician.us_state}}</li>
+    <li class="list-group-item">
+      {% if physician.taking_new_pts %}
+        <span class="badge bg-primary-subtle border border-primary-subtle text-primary-emphasis rounded-pill">Taking new patients</span>
+      {% else %}
+        <span class="badge bg-danger-subtle border border-danger-subtle text-danger-emphasis rounded-pill">Not taking new patients</span>
+      {% endif %}
+    </li>
+    <li class="list-group-item">
+      {% if el.accepts_medicaid_medicare %}
+        <span class="badge bg-primary-subtle border border-primary-subtle text-primary-emphasis rounded-pill">Medicare/Medicaid</span>
+      {% else %}
+        <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">Private Insurance</span>
+      {% endif %}
+    </li>
+  </ul>
+</div>
+{% endblock %}
