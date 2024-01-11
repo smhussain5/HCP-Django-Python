@@ -4,13 +4,10 @@
 {{physician.first_name}} {{physician.last_name}}, {{physician.degree_type}}
 {% endblock %}
 
-{% block heading %}
-{{physician.first_name}} {{physician.last_name}}, {{physician.degree_type}}
-{% endblock %}
-
 {% block content %}
 <div class="card">
   <ul class="list-group list-group-flush">
+    <li class="list-group-item"><strong>Name:&nbsp;</strong>{{physician.first_name}} {{physician.last_name}}, {{physician.degree_type}}</li>
     <li class="list-group-item"><strong>Specialty:&nbsp;</strong>{{physician.specialty}}</li>
     <li class="list-group-item"><strong>About Me:&nbsp;</strong>{{physician.about_me}}</li>
     <li class="list-group-item"><strong>Phone Number:&nbsp;</strong>{{physician.phone_number}}</li>

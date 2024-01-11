@@ -12,7 +12,7 @@
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <div class="btn-group" role="group" aria-label="Basic example">
             {% if user.is_authenticated %}
-              <a type="button" class="btn btn-outline-danger" href="{% url 'register' %}">Logout</a>
+              <a type="button" class="btn btn-outline-danger" href="{% url 'logout' %}">Logout</a>
             {% else %}
               <a type="button" class="btn btn-outline-primary" href="{% url 'login' %}">Login</a>
               <a type="button" class="btn btn-outline-light" href="{% url 'register' %}">Register</a>
