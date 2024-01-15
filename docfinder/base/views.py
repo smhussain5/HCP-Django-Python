@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .models import Physician, Specialty
@@ -12,8 +12,15 @@ from .forms import PhysicianForm
 
 @login_required(login_url="login")
 def index(request):
+    search = request.GET.get('search')
+    if search is not None:
+        physicians = Physician.objects.filter(Q(first_name__icontains=search) |
+                                              Q(last_name__icontains=search) |
+                                              Q(us_city__icontains=search) |
+                                              Q(us_state__icontains=search)).order_by("last_name")
+    else:
+        physicians = Physician.objects.all().order_by("last_name")
     specialties = Specialty.objects.all().order_by("name")
-    physicians = Physician.objects.all().order_by("last_name")
     context = {}
     context["specialties"] = specialties
     context["physicians"] = physicians
@@ -98,9 +105,16 @@ def by_physician(request, pk):
 
 @login_required(login_url="login")
 def by_specialty(request, pk):
+    search = request.GET.get('search')
+    if search is not None:
+        physician_by_specialty = Physician.objects.filter(specialty=pk).filter(Q(first_name__icontains=search) |
+                                                                          Q(last_name__icontains=search) |
+                                                                          Q(us_city__icontains=search) |
+                                                                          Q(us_state__icontains=search)).order_by("last_name")
+    else:
+        physician_by_specialty = Physician.objects.filter(specialty=pk).order_by("last_name")
     specialties = Specialty.objects.all().order_by("name")
     specialty = Specialty.objects.get(id=pk)
-    physician_by_specialty = Physician.objects.filter(specialty=pk)
     context = {}
     context["physicians"] = physician_by_specialty
     context["specialties"] = specialties

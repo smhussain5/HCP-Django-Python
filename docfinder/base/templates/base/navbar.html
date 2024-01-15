@@ -10,12 +10,13 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <div class="btn-group" role="group" aria-label="Basic example">
+          <div class="btn-group-vertical" role="group">
             {% if user.is_authenticated %}
-              <a type="button" class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
+              <a type="button" class="btn btn-outline-danger" href="{% url 'logout' %}">Logout</a>
+              <a type="button" class="btn btn-outline-success" href="{% url 'add_physician' %}">Add Physician</a>
             {% else %}
-              <a type="button" class="btn btn-primary" href="{% url 'login' %}">Login</a>
-              <a type="button" class="btn btn-outline-warning" href="{% url 'register' %}">Register</a>
+              <a type="button" class="btn btn-outline-primary" href="{% url 'login' %}">Login</a>
+              <a type="button" class="btn btn-outline-light" href="{% url 'register' %}">Register</a>
             {% endif %}
           </div>
           <li class="nav-item dropdown mb-2">
@@ -31,7 +32,6 @@
             </ul>
           </li>
         </ul>
-        <a type="button" class="btn btn-success" href="{% url 'add_physician' %}">Add Physician</a>
       </div>
     </div>
   </div>

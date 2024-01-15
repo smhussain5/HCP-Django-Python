@@ -9,6 +9,10 @@
 {% endblock %}
 
 {% block content %}
+<form class="input-group mb-3" method="GET" action="{% url 'specialty' specialty.id %}?search=">
+  <input type="text" class="form-control" placeholder="Search by name, location..." name="search" autocomplete="off">
+  <button class="btn btn-outline-primary" type="button">Search</button>
+</form>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
   {% for el in physicians %}
     <div class="col">
