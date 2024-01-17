@@ -34,7 +34,7 @@ Add Physician
       {% endfor %}
       <button type="submit" class="btn btn-primary mb-3">Submit</button>
     </form>
-    <p>Hmm, nevermind.&nbsp;<a href="{% url 'index' %}">Go home!</a></p>
+    <p>Hmm, nevermind.&nbsp;<a href="{{ request.META.HTTP_REFERER }}">Go home!</a></p>
   </div>
 </div>
 {% endblock %}

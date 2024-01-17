@@ -11,6 +11,7 @@
       <div>
         <strong>Name:&nbsp;</strong>{{physician.first_name}} {{physician.last_name}}, {{physician.degree_type}}
       </div>
+      {% if perms.base.can_change_physician and perms.base.can_delete_physician %}
       <div class="btn-group" role="group" aria-label="Basic example">
         <a href="{% url 'edit_physician' physician.id%}" type="button" class="btn btn-outline-primary">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -26,6 +27,7 @@
           &nbsp;Delete
         </a>
       </div>
+      {% endif %}
     </li>
     <li class="list-group-item"><strong>Specialty:&nbsp;</strong>{{physician.specialty}}</li>
     <li class="list-group-item"><strong>About Me:&nbsp;</strong>{{physician.about_me}}</li>

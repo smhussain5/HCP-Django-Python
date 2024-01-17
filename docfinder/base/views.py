@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
@@ -46,6 +46,7 @@ def login_user(request):
         return render(request, 'base/login.html', context)
 
 
+@login_required(login_url="login")
 def logout_user(request):
     specialties = Specialty.objects.all().order_by("name")
     context = {}
@@ -76,6 +77,7 @@ def register_user(request):
 
 
 @login_required(login_url="login")
+@permission_required("base.can_add_physician")
 def add_physician(request):
     form = PhysicianForm()
     specialties = Specialty.objects.all().order_by("name")
@@ -93,15 +95,30 @@ def add_physician(request):
     return render(request, 'base/add_physician.html', context)
 
 
+@login_required(login_url="login")
+@permission_required("base.can_change_physician")
 def edit_physician(request, pk):
     physician_record = Physician.objects.get(id=pk)
+    form = PhysicianForm(instance=physician_record)
     specialties = Specialty.objects.all().order_by("name")
     context = {}
     context["physician"] = physician_record
     context["specialties"] = specialties
+    context["form"] = form
+    if request.method == "POST":
+        form = PhysicianForm(request.POST, instance=physician_record)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "This physician has been updated!")
+            return redirect("/", context)
+        else:
+            messages.error(request, "Uh-oh! There was an error updating this physician! Try again?")
+            return render(request, 'base/edit_physician.html', context)
     return render(request, 'base/edit_physician.html', context)
 
 
+@login_required(login_url="login")
+@permission_required("base.can_delete_physician")
 def delete_physician(request, pk):
     physician_record = Physician.objects.get(id=pk)
     specialties = Specialty.objects.all().order_by("name")
