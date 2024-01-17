@@ -87,10 +87,32 @@ def add_physician(request):
         if form.is_valid():
             form.save()
             return redirect("/", context)
-    else:
-        messages.error(request, "Uh-oh! There was an error adding this physician! Try again?")
-        return render(request, 'base/add_physician.html', context)
+        else:
+            messages.error(request, "Uh-oh! There was an error adding this physician! Try again?")
+            return render(request, 'base/add_physician.html', context)
     return render(request, 'base/add_physician.html', context)
+
+
+def edit_physician(request, pk):
+    physician_record = Physician.objects.get(id=pk)
+    specialties = Specialty.objects.all().order_by("name")
+    context = {}
+    context["physician"] = physician_record
+    context["specialties"] = specialties
+    return render(request, 'base/edit_physician.html', context)
+
+
+def delete_physician(request, pk):
+    physician_record = Physician.objects.get(id=pk)
+    specialties = Specialty.objects.all().order_by("name")
+    context = {}
+    context["physician"] = physician_record
+    context["specialties"] = specialties
+    if request.method == "POST":
+        physician_record.delete()
+        messages.success(request, "This physician has been deleted!")
+        return redirect("/", context)
+    return render(request, 'base/delete_physician.html', context)
 
 
 @login_required(login_url="login")
