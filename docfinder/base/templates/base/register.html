@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-Register
+DocFinder | Register
 {% endblock %}
 
 {% block heading %}
@@ -18,19 +18,13 @@ Register
   {% endfor %}
 {% endif %}
 
-<div class="card">
+{% load crispy_forms_tags %}
+
+<div class="card mb-3">
   <div class="card-body">
     <form action="{% url 'register' %}" method="POST">
       {% csrf_token %}
-      {% for field in form %}
-      <div class="mb-3 d-flex flex-column">
-        <label class="form-label">{{ field.label }}</label>
-        {{ field }}
-        {% if field.help_text %}
-        <p class="help">{{ field.help_text|safe }}</p>
-        {% endif %}
-      </div>
-      {% endfor %}
+      {{ form|crispy }}
       <button type="submit" class="btn btn-primary mb-3">Submit</button>
     </form>
     <p>Already have an account? Cool!&nbsp;<a href="{% url 'login' %}">Login here</a></p>

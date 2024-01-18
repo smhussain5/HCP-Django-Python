@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-{{specialty.name}}
+DocFinder | {{specialty.name}}
 {% endblock %}
 
 {% block heading %}
@@ -11,7 +11,12 @@
 {% block content %}
 <form class="input-group mb-3" method="GET" action="{% url 'specialty' specialty.id %}?search=">
   <input type="text" class="form-control" placeholder="Search by name, location..." name="search" autocomplete="off">
-  <button class="btn btn-outline-primary" type="button">Search</button>
+  <button class="btn btn-outline-primary" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+    </svg>
+    &nbsp;Search
+  </button>
 </form>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
   {% for el in physicians %}
@@ -23,8 +28,8 @@
               {{el.first_name}} {{el.last_name}}, {{el.degree_type}}
             </p>
             <a href="{% url 'physician' el.id%}" class="link-underline-opacity-0 link-primary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
-                  <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
               </svg>
             </a>
           </div>

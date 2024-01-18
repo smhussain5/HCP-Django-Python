@@ -1,27 +1,21 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-Edit Physician
+DocFinder | Edit Physician
 {% endblock %}
 
 {% block heading %}
 Edit Physician
 {% endblock %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 <div class="card mb-3">
   <div class="card-body">
     <form action="{% url 'edit_physician' physician.id %}" method="POST">
       {% csrf_token %}
-      {% for field in form %}
-      <div class="mb-3 d-flex flex-column align-items-start">
-        <label class="form-label">{{ field.label }}</label>
-        {{ field }}
-        {% if field.help_text %}
-        <p class="help">{{ field.help_text|safe }}</p>
-        {% endif %}
-      </div>
-      {% endfor %}
+      {{ form|crispy }}
       <button type="submit" class="btn btn-primary mb-3">Submit</button>
     </form>
     <p>Hmm, nevermind.&nbsp;<a href="{{ request.META.HTTP_REFERER }}">Go home!</a></p>
