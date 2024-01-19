@@ -4,17 +4,25 @@
 
 ## Problem 🤔
 
-<!--Being able to connect with people from different countries is one of the most powerful features of the internet. This rapid globalization necessitates the need for applications that help translate text to various languages to facilitate communication.--->
+With ~1,000,000 active physicians available to treat ~330,000,000 Americans, patients can find it difficult to find healthcare that suits their specific needs. When a patient is finally referred to a specialist by their primary care physician, there may still be obstacles that could delay care (eg, specialist not taking new patients, not accepting medicare/medicaid).
 
 ## Solution 💡
 
-<!--This terminal application utilizes Google Translator's API to convert text from english to one of 10 languages. The original text is displayed with the translated text below. Users have the option to translate as often as they want.--->
+This full-stack application provides patients with an active database containing information on physicians in the US. Patients can search for physicians by city/name and view physicians in specific specialties (eg, cardiology, neurology, psychiatry, etc). Each card has a link that dynamically renders that physician's profile, which contains their biography, practice address, and city/state of operation. All pages, except for login/register, are locked to unauthenticated users (Feel free to login using the information below!).
+
+> **USERNAME**: test_member<br>
+> **PASSWORD**: Django2024!<br>
+
+For security, only users with specific permissions can add/delete/edit physicians to the database. Front-end utilizes Bootstrap5/Bootswatch themes. Back-end utilizes Django and PostgreSQL database provided by Heroku.
+
+**NOTE**: All names, addresses, phone numbers were collected using ChatGPT and fake address generators. Any resemblance to actual locales or persons, living or dead, is entirely coincidental.
 
 ## Technologies Used ⚙
 
 - Bootstrap
 - CSS3
 - Django
+- Django-Crispy-Forms
 - Heroku
 - HTML5
 - PyCharm
