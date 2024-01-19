@@ -60,6 +60,7 @@ class Physician(models.Model):
         "WI": "Wisconsin",
         "WY": "Wyoming",
     }
+    id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
     degree_type = models.CharField(max_length=2, choices=DEGREE_TYPE)
@@ -77,6 +78,7 @@ class Physician(models.Model):
 
 
 class Specialty(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
 
     class Meta:
