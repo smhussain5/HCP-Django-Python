@@ -62,13 +62,13 @@ class Physician(models.Model):
     }
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
-    degree_type = models.CharField(max_length=2, choices=DEGREE_TYPE, default="MD")
+    degree_type = models.CharField(max_length=2, choices=DEGREE_TYPE)
     specialty = models.ForeignKey("Specialty", on_delete=models.CASCADE)
     about_me = models.TextField(null=True, blank=True)
     address = models.CharField(max_length=250, null=True, blank=True)
-    us_city = models.CharField(max_length=250, default="Austin", verbose_name="US City")
-    us_state = models.CharField(max_length=2, choices=US_STATE, default="TX", verbose_name="US State")
-    phone_number = models.CharField(max_length=15, null=True, blank=True)
+    us_city = models.CharField(max_length=250, verbose_name="US City", null=True, blank=True)
+    us_state = models.CharField(max_length=2, choices=US_STATE, verbose_name="US State", default="TX")
+    phone_number = models.CharField(max_length=20, null=True, blank=True)
     accepts_medicaid_medicare = models.BooleanField(default=False, verbose_name="Accepts medicaid/medicare")
     taking_new_pts = models.BooleanField(default=False, verbose_name="Taking new patients")
 
