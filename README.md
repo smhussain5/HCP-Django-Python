@@ -30,11 +30,11 @@ For security, only users with specific permissions can add/delete/edit physician
 
 ## Challenges 💢
 
-<!--This was a straightforward application, but I originally had options for languages that utilized non-Latin alphabet (eg, Korean, Russian). Although this worked in the PyCharm terminal, it did not translate (😉) to the Python shell.--->
+Originally, I wanted to add a "bookmark" feature so users can find their physicians of interest. From my research, it seems this would require knowledge of jQuery, which I have yet to learn. Deployment to Heroku was challenging to say the least. Migrating from SQLite to PostgreSQL produced errors due to mismatching of variable types. After some research on StackOverflow, I decided to delete the original SQLite database and migrate all models to the new PostgreSQL database and repopulate it via the front-end model forms and admin panel.
 
 ## Insights 💭
 
-<!--I enjoyed using this library and did not utilize the full array of features like auto-detection. It would be interesting to explore using text-to-speech and maybe developing a full-stack Google Translate clone!--->
+I enjoyed developing this feature-rich application and I really believe there's potential to add more features (eg, bookmarks, reviews, etc) and scale this further. Although the complexity of Django seems daunting initially, it becomes much easier after the steep learning curve.
 
 ## Contact 📲
 
