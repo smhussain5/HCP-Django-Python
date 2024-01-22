@@ -34,7 +34,7 @@ Originally, I wanted to add a "bookmark" feature so users can find their physici
 
 ## Insights 💭
 
-I enjoyed developing this feature-rich application and I really believe there's potential to add more features (eg, bookmarks, reviews, etc) and scale this further. Although the complexity of Django seems daunting initially, it becomes much easier after the steep learning curve.
+I enjoyed developing this feature-rich application and I really believe there's potential to add more features (eg, bookmarks, reviews, etc) and scale this further. If this were to use real, active physicians, I would consider a verification step via email and include their profile picture and NPI number in their profile page. Although the complexity of Django seems daunting initially, it becomes much easier after the steep learning curve.
 
 ## Contact 📲
 
