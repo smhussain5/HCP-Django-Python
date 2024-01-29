@@ -12,19 +12,21 @@ from .forms import PhysicianForm
 
 @login_required(login_url="login")
 def index(request):
-    search = request.GET.get('search')
+    search = request.GET.get("search")
     if search is not None:
-        physicians = Physician.objects.filter(Q(first_name__icontains=search) |
-                                              Q(last_name__icontains=search) |
-                                              Q(us_city__icontains=search) |
-                                              Q(us_state__icontains=search)).order_by("last_name")
+        physicians = Physician.objects.filter(
+            Q(first_name__icontains=search)
+            | Q(last_name__icontains=search)
+            | Q(us_city__icontains=search)
+            | Q(us_state__icontains=search)
+        ).order_by("last_name")
     else:
         physicians = Physician.objects.all().order_by("last_name")
     specialties = Specialty.objects.all().order_by("name")
     context = {}
     context["specialties"] = specialties
     context["physicians"] = physicians
-    return render(request, 'base/index.html', context)
+    return render(request, "base/index.html", context)
 
 
 def login_user(request):
@@ -32,18 +34,20 @@ def login_user(request):
     context = {}
     context["specialties"] = specialties
     if request.method == "POST":
-        username = request.POST['un_input']
-        password = request.POST['pw_input']
+        username = request.POST["un_input"]
+        password = request.POST["pw_input"]
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             messages.success(request, "Woo! You're logged in! 🎉")
             return redirect("/", context)
         else:
-            messages.error(request, "Uh-oh! There was an error logging you in! Try again?")
-            return render(request, 'base/login.html', context)
+            messages.error(
+                request, "Uh-oh! There was an error logging you in! Try again?"
+            )
+            return render(request, "base/login.html", context)
     else:
-        return render(request, 'base/login.html', context)
+        return render(request, "base/login.html", context)
 
 
 @login_required(login_url="login")
@@ -71,9 +75,11 @@ def register_user(request):
             messages.success(request, "Woo! You're registered! 🎉")
             return redirect("/", context)
         else:
-            messages.error(request, "Uh-oh! There was an error with registration! Try again?")
-            return render(request, 'base/register.html', context)
-    return render(request, 'base/register.html', context)
+            messages.error(
+                request, "Uh-oh! There was an error with registration! Try again?"
+            )
+            return render(request, "base/register.html", context)
+    return render(request, "base/register.html", context)
 
 
 @login_required(login_url="login")
@@ -90,9 +96,11 @@ def add_physician(request):
             form.save()
             return redirect("/", context)
         else:
-            messages.error(request, "Uh-oh! There was an error adding this physician! Try again?")
-            return render(request, 'base/add_physician.html', context)
-    return render(request, 'base/add_physician.html', context)
+            messages.error(
+                request, "Uh-oh! There was an error adding this physician! Try again?"
+            )
+            return render(request, "base/add_physician.html", context)
+    return render(request, "base/add_physician.html", context)
 
 
 @login_required(login_url="login")
@@ -112,9 +120,11 @@ def edit_physician(request, pk):
             messages.success(request, "This physician has been updated!")
             return redirect("/", context)
         else:
-            messages.error(request, "Uh-oh! There was an error updating this physician! Try again?")
-            return render(request, 'base/edit_physician.html', context)
-    return render(request, 'base/edit_physician.html', context)
+            messages.error(
+                request, "Uh-oh! There was an error updating this physician! Try again?"
+            )
+            return render(request, "base/edit_physician.html", context)
+    return render(request, "base/edit_physician.html", context)
 
 
 @login_required(login_url="login")
@@ -129,7 +139,7 @@ def delete_physician(request, pk):
         physician_record.delete()
         messages.success(request, "This physician has been deleted!")
         return redirect("/", context)
-    return render(request, 'base/delete_physician.html', context)
+    return render(request, "base/delete_physician.html", context)
 
 
 @login_required(login_url="login")
@@ -139,23 +149,31 @@ def by_physician(request, pk):
     context = {}
     context["physician"] = physician_record
     context["specialties"] = specialties
-    return render(request, 'base/physician.html', context)
+    return render(request, "base/physician.html", context)
 
 
 @login_required(login_url="login")
 def by_specialty(request, pk):
-    search = request.GET.get('search')
+    search = request.GET.get("search")
     if search is not None:
-        physician_by_specialty = Physician.objects.filter(specialty=pk).filter(Q(first_name__icontains=search) |
-                                                                          Q(last_name__icontains=search) |
-                                                                          Q(us_city__icontains=search) |
-                                                                          Q(us_state__icontains=search)).order_by("last_name")
+        physician_by_specialty = (
+            Physician.objects.filter(specialty=pk)
+            .filter(
+                Q(first_name__icontains=search)
+                | Q(last_name__icontains=search)
+                | Q(us_city__icontains=search)
+                | Q(us_state__icontains=search)
+            )
+            .order_by("last_name")
+        )
     else:
-        physician_by_specialty = Physician.objects.filter(specialty=pk).order_by("last_name")
+        physician_by_specialty = Physician.objects.filter(specialty=pk).order_by(
+            "last_name"
+        )
     specialties = Specialty.objects.all().order_by("name")
     specialty = Specialty.objects.get(id=pk)
     context = {}
     context["physicians"] = physician_by_specialty
     context["specialties"] = specialties
     context["specialty"] = specialty
-    return render(request, 'base/specialty.html', context)
+    return render(request, "base/specialty.html", context)

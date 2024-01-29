@@ -67,11 +67,19 @@ class Physician(models.Model):
     specialty = models.ForeignKey("Specialty", on_delete=models.CASCADE)
     about_me = models.TextField(null=True, blank=True)
     address = models.CharField(max_length=250, null=True, blank=True)
-    us_city = models.CharField(max_length=250, verbose_name="US City", null=True, blank=True)
-    us_state = models.CharField(max_length=2, choices=US_STATE, verbose_name="US State", default="TX")
+    us_city = models.CharField(
+        max_length=250, verbose_name="US City", null=True, blank=True
+    )
+    us_state = models.CharField(
+        max_length=2, choices=US_STATE, verbose_name="US State", default="TX"
+    )
     phone_number = models.CharField(max_length=20, null=True, blank=True)
-    accepts_medicaid_medicare = models.BooleanField(default=False, verbose_name="Accepts medicaid/medicare")
-    taking_new_pts = models.BooleanField(default=False, verbose_name="Taking new patients")
+    accepts_medicaid_medicare = models.BooleanField(
+        default=False, verbose_name="Accepts medicaid/medicare"
+    )
+    taking_new_pts = models.BooleanField(
+        default=False, verbose_name="Taking new patients"
+    )
 
     def __str__(self):
         return f"{self.last_name}, {self.degree_type} ({self.specialty})"

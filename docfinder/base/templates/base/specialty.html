@@ -18,6 +18,7 @@ DocFinder | {{specialty.name}}
     &nbsp;Search
   </button>
 </form>
+{% if physicians %}
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
   {% for el in physicians %}
     <div class="col">
@@ -51,4 +52,12 @@ DocFinder | {{specialty.name}}
     </div>
   {% endfor %}
 </div>
+{% else %}
+<div class="card border-primary mb-3">
+  <div class="card-header fw-semibold text-bg-primary">Well, this is awkward! We couldn't find anybody! 😱</div>
+  <div class="card-body">
+    <p class="card-text">Maybe they haven't been added to our database yet? Or maybe you made a typo? 🤔</p>
+  </div>
+</div>
+{% endif %}
 {% endblock %}
